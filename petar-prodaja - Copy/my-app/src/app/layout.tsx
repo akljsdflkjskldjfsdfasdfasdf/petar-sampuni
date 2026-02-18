@@ -31,19 +31,19 @@ export default function RootLayout({
  const scrollToProducts = () => {
   if (!mainRef.current) return; // zaštita od null
   gsap.to(window, {
-    duration: 1.5,
-    scrollTo: { y: mainRef.current, offsetY: 70 },
-    ease: "power4.inOut",
-  });
+      duration: 1.5,
+      scrollTo: { y: mainRef.current, offsetY: 70 }, // offsetY ostavlja malo mesta iznad naslova
+      ease: "power2.out",
+    });
 };
 
 const scrollToAbout = () => {
   if (!aboutRef.current) return; // zaštita od null
   gsap.to(window, {
-    duration: 1.5,
-    scrollTo: { y: aboutRef.current, offsetY: 50 },
-    ease: "power4.inOut",
-  });
+      duration: 1.5,
+      scrollTo: { y: aboutRef.current, offsetY: 50 },
+      ease: "power2.out",
+    });
 };
 
 
