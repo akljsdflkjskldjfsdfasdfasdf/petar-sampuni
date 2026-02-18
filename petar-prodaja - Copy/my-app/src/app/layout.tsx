@@ -29,20 +29,23 @@ export default function RootLayout({
   const textRef = useRef<HTMLHeadingElement>(null);
   const aboutRef = useRef<HTMLElement>(null);
   const scrollToProducts = () => {
-    gsap.to(window, {
+  if (!mainRef.current) return; // zaštita od null
+  gsap.to(window, {
       duration: 1.5,
       scrollTo: { y: mainRef.current, offsetY: 70 }, // offsetY ostavlja malo mesta iznad naslova
       ease: "power2.out",
     });
-  };
+};
 
-  const scrollToAbout = () => {
-    gsap.to(window, {
+const scrollToAbout = () => {
+  if (!aboutRef.current) return; // zaštita od null
+  gsap.to(window, {
       duration: 1.5,
       scrollTo: { y: aboutRef.current, offsetY: 50 },
       ease: "power2.out",
     });
-  };
+};
+
 
   // 2. Pokrećemo animaciju kada se komponenta montira
   useEffect(() => {
@@ -275,3 +278,4 @@ export default function RootLayout({
     </html>
   );
 }
+
