@@ -28,24 +28,26 @@ export default function RootLayout({
   const buttonRef = useRef<HTMLButtonElement>(null);
   const textRef = useRef<HTMLHeadingElement>(null);
   const aboutRef = useRef<HTMLElement>(null);
+
+ 
   const scrollToProducts = () => {
-  if (!mainRef.current) return; // zaštita od null
-  gsap.to(window, {
+    if (!mainRef.current) return; // zaštita od null
+     const isMediumUp = window.matchMedia("(min-width: 768px)").matches;
+    gsap.to(window, {
       duration: 1.5,
-      scrollTo: { y: mainRef.current, offsetY: 70 }, // offsetY ostavlja malo mesta iznad naslova
+      scrollTo: { y: mainRef.current, offsetY: isMediumUp ? 350 : 80 }, // offsetY ostavlja malo mesta iznad naslova
       ease: "power2.out",
     });
-};
+  };
 
-const scrollToAbout = () => {
-  if (!aboutRef.current) return; // zaštita od null
-  gsap.to(window, {
+  const scrollToAbout = () => {
+    if (!aboutRef.current) return; // zaštita od null
+    gsap.to(window, {
       duration: 1.5,
       scrollTo: { y: aboutRef.current, offsetY: 50 },
       ease: "power2.out",
     });
-};
-
+  };
 
   // 2. Pokrećemo animaciju kada se komponenta montira
   useEffect(() => {
@@ -165,13 +167,13 @@ const scrollToAbout = () => {
             className="relative h-[85vh] w-[80vw] m-auto mt-3.5 rounded-4xl bg-[url(/hair.jpg)] bg-no-repeat bg-center bg-cover bg-top"
           >
             {/* Overlay sloj */}
-            <div className="absolute inset-0 bg-black/45 rounded-4xl"></div>
+            <div className="absolute inset-0 bg-black/35 rounded-4xl"></div>
 
             {/* Sadržaj iznad overlay-a */}
             <button
               ref={buttonRef}
               onClick={scrollToProducts}
-              className="hover:bg-amber-400/70  absolute w-67  md:w-[60vw] lg:w-[25vw]  h-[7vh] rounded-[100vw] bg-gray-300  bottom-10 md:top-[65vh]  left-1/2 text-shadow-lg text-shadow-white -translate-x-1/2 text-black text-[5vh] font-serif uppercase z-10"
+              className="hover:bg-amber-400/70  absolute w-67  md:w-[60vw] lg:w-[25vw]  h-[7vh] rounded-[100vw] bg-amber-400/70  bottom-10 md:top-[65vh]  left-1/2 text-shadow-lg text-shadow-white -translate-x-1/2 text-black text-[5vh] font-serif uppercase z-10"
             >
               PROIZVODI
             </button>
@@ -185,7 +187,7 @@ const scrollToAbout = () => {
         </div>
         {/* MAIN CONTENT */}
         <main
-          className="flex-1 container mx-auto p-6 scroll-mt-[20vw]"
+          className="flex-1 container mx-auto  scroll-mt-[50vw]"
           ref={mainRef}
         >
           {children}
@@ -278,4 +280,3 @@ const scrollToAbout = () => {
     </html>
   );
 }
-
