@@ -50,17 +50,14 @@ export default function RootLayout({
 
   // 2. Pokrećemo animaciju kada se komponenta montira
   useEffect(() => {
-  window.history.scrollRestoration = "manual";
-  
-  const timer = setTimeout(() => {
-    window.scrollTo(0, 0);
-  }, 10); // 10ms je dovoljno da Next.js završi svoje
+    window.history.scrollRestoration = "manual";
 
+    const timer = setTimeout(() => {
+      window.scrollTo(0, 0);
+    }, 10); // 10ms je dovoljno da Next.js završi svoje
 
     const ctx = gsap.context(() => {
       const tl = gsap.timeline();
-
-     
 
       // 1. Header animacija
       tl.from(headerRef.current, {
