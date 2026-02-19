@@ -29,10 +29,9 @@ export default function RootLayout({
   const textRef = useRef<HTMLHeadingElement>(null);
   const aboutRef = useRef<HTMLElement>(null);
 
- 
   const scrollToProducts = () => {
-    if (!mainRef.current) return; // zaštita od null
-     const isMediumUp = window.matchMedia("(min-width: 768px)").matches;
+    if (!mainRef.current) return; // zaštita od nullx
+    const isMediumUp = window.matchMedia("(min-width: 768px)").matches;
     gsap.to(window, {
       duration: 1.5,
       scrollTo: { y: mainRef.current, offsetY: isMediumUp ? 350 : 80 }, // offsetY ostavlja malo mesta iznad naslova
@@ -51,10 +50,17 @@ export default function RootLayout({
 
   // 2. Pokrećemo animaciju kada se komponenta montira
   useEffect(() => {
+  window.history.scrollRestoration = "manual";
+  
+  const timer = setTimeout(() => {
+    window.scrollTo(0, 0);
+  }, 10); // 10ms je dovoljno da Next.js završi svoje
+
+
     const ctx = gsap.context(() => {
       const tl = gsap.timeline();
 
-      window.scrollTo(0, 0);
+     
 
       // 1. Header animacija
       tl.from(headerRef.current, {
