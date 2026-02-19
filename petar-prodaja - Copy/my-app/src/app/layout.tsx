@@ -47,14 +47,15 @@ export default function RootLayout({
       ease: "power2.out",
     });
   };
+  if (typeof window !== "undefined") {
+    window.history.scrollRestoration = "manual";
+  }
 
   // 2. Pokrećemo animaciju kada se komponenta montira
   useEffect(() => {
-    window.history.scrollRestoration = "manual";
-
     const timer = setTimeout(() => {
       window.scrollTo(0, 0);
-    }, 90); // 10ms je dovoljno da Next.js završi svoje
+    }, 50); // 10ms je dovoljno da Next.js završi svoje
 
     const ctx = gsap.context(() => {
       const tl = gsap.timeline();
