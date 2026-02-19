@@ -54,7 +54,7 @@ export default function RootLayout({
 
     const timer = setTimeout(() => {
       window.scrollTo(0, 0);
-    }, 10); // 10ms je dovoljno da Next.js završi svoje
+    }, 30); // 10ms je dovoljno da Next.js završi svoje
 
     const ctx = gsap.context(() => {
       const tl = gsap.timeline();
