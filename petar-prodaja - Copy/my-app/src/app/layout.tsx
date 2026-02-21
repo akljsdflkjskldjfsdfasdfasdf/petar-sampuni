@@ -169,7 +169,7 @@ export default function RootLayout({
         <div className="h-[95vh]">
           <div
             ref={heroRef}
-            className="relative h-[85vh] w-[80vw] m-auto mt-3.5 rounded-4xl bg-[url(/hair.jpg)] bg-no-repeat bg-center bg-cover bg-top"
+            className="relative h-[85vh] w-[90vw] m-auto mt-3.5 rounded-4xl bg-[url(/hair.jpg)] bg-no-repeat bg-center bg-cover bg-top"
           >
             {/* Overlay sloj */}
             <div className="absolute inset-0 bg-black/35 rounded-4xl"></div>
