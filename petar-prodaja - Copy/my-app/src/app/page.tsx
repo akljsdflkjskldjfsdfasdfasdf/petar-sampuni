@@ -52,7 +52,7 @@ export default function AboutPage() {
 
                   ease: "back.inOut",
                   overwrite: "auto",
-                  delay: (index % 3) * 0.2,
+                  delay: (index % 3) * 0.1,
                 },
               );
             },
