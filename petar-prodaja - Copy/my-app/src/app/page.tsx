@@ -39,7 +39,7 @@ export default function AboutPage() {
         gsap.utils.toArray(cards).forEach((card: any, index: number) => {
           ScrollTrigger.create({
             trigger: card,
-            start: "top 82%",
+            start: "top 90%",
 
             // onEnter: kad ideš na dole
             onEnter: () => {
