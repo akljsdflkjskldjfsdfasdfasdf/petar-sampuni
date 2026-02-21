@@ -121,8 +121,8 @@ export default function RootLayout({
 
   return (
     <html lang="en">
-      <body className=" relative  !bg-gradient-to-b from-white/25  to-gray-100/10 to-101% md:to-60% text-gray-900 flex flex-col min-h-screen ">
-         <div  className=" relative  !bg-gradient-to-b from-white/25  to-gray-100/10 to-101% md:to-60% text-gray-900 flex flex-col min-h-screen ">
+      <body >
+         <div  className=" relative  bg-gradient-to-b from-white/25  to-gray-100/10 to-101% md:to-60% text-gray-900 flex flex-col min-h-screen ">
         {/* HEADER - Dodali smo ref={headerRef} */}
         <header
           ref={headerRef}
