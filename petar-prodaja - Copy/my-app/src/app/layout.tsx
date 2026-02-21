@@ -213,7 +213,7 @@ export default function RootLayout({
 
           {/* Kontakt informacije */}
           <div className="flex flex-col md:flex-row justify-around items-center gap-6 mb-8 drop-shadow-2xl drop-shadow-black">
-            <div className="text-center mx-auto ">
+            <div className="text-center mx-auto text-white ">
               <h3 className="text-xl font-semibold mb-2 text-amber-300">
                 Kontakt
               </h3>
@@ -224,7 +224,7 @@ export default function RootLayout({
 
             {/* Opciona horizontalna linija samo za mobilni */}
             <div className="block md:hidden w-20 border-t-2 border-amber-300/30"></div>
-            <div className="text-center mx-auto">
+            <div className="text-center mx-auto text-white">
               <h3 className="text-xl font-semibold mb-2 text-amber-300">
                 Adresa
               </h3>
