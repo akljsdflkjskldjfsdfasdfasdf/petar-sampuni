@@ -55,7 +55,7 @@ export default function RootLayout({
   useEffect(() => {
     const timer = setTimeout(() => {
       window.scrollTo(0, 0);
-    }, 250); // 10ms je dovoljno da Next.js završi svoje
+    }, 350); // 10ms je dovoljno da Next.js završi svoje
 
     const ctx = gsap.context(() => {
       const tl = gsap.timeline();
@@ -122,6 +122,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className=" relative  !bg-gradient-to-b from-white/25  to-gray-100/10 to-101% md:to-60% text-gray-900 flex flex-col min-h-screen ">
+         <div  className=" relative  !bg-gradient-to-b from-white/25  to-gray-100/10 to-101% md:to-60% text-gray-900 flex flex-col min-h-screen ">
         {/* HEADER - Dodali smo ref={headerRef} */}
         <header
           ref={headerRef}
@@ -280,6 +281,7 @@ export default function RootLayout({
             </div>
           </div>
         </footer>
+           </div>
       </body>
     </html>
   );
