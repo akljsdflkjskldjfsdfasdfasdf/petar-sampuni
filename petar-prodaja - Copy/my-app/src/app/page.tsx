@@ -34,38 +34,42 @@ export default function AboutPage() {
     if (gridRef.current) {
       let ctx = gsap.context(() => {
         const cards = gridRef.current!.children;
-        gsap.set(cards, { opacity: 0, x: 190 });
 
+        // Koristimo toArray da bi svaka kartica dobila svoj ScrollTrigger
         gsap.utils.toArray(cards).forEach((card: any, index: number) => {
-          ScrollTrigger.create({
-            trigger: card,
-            start: "top 90%",
+          gsap.fromTo(
+            card,
+            {
+              x: 190,
+              opacity: 0,
+            }, // Početno stanje (automatski se primenjuje čim se stranica učita)
+            {
+              x: 0,
+              opacity: 1,
+              ease: "back.inOut",
+              duration: 0.8,
+              overwrite: "auto",
+              delay: (index % 3) * 0.1, // Zadržavamo tvoj stagger efekat
 
-            // onEnter: kad ideš na dole
-            onEnter: () => {
-              gsap.fromTo(
-                card,
-                { x: 190, opacity: 0 },
-                {
-                  x: 0,
-                  opacity: 1,
+              scrollTrigger: {
+                trigger: card,
+                start: "top 90%", // Animacija krece kad vrh kartice udari u 90% visine ekrana
 
-                  ease: "back.inOut",
-                  overwrite: "auto",
-                  delay: (index % 3) * 0.1,
-                },
-              );
+                // REDOSLED: onEnter, onLeave, onEnterBack, onLeaveBack
+                // "play" - pokreni animaciju ka x:0
+                // "reverse" - vrati animaciju unazad ka x:190 kad skroluješ nazad
+                toggleActions: "play none play reverse",
+
+                // markers: true, // Otkomentariši ovo ako želiš da vidiš linije okidača na ekranu
+              },
             },
-            // onEnterBack: kad se vraćaš odozdo na gore
-            onLeaveBack: () => gsap.set(card, { opacity: 0, duration: 2 }),
-            // Opciono: šta se dešava kad karta izađe iz ekrana
-          });
+          );
         });
       }, gridRef);
 
-      return () => ctx.revert();
+      return () => ctx.revert(); // Čisti sve animacije da nema memory leak-a
     }
-  }, [filteredProducts]); // Bolje je da pratiš filteredProducts
+  }, [filteredProducts]);
 
   return (
     <div className="container mx-auto p-6 h-100% ">
