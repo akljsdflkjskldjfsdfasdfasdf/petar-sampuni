@@ -118,17 +118,17 @@ export default function AboutPage() {
               <img
                 src={product.image_url}
                 alt={product.name}
-                className="w-100% h-50 object-cover rounded-md drop-shadow-lg drop-shadow-yellow-600"
+                className="w-100% h-50 object-cover rounded-md drop-shadow-xl drop-shadow-orange-600"
               />
             )}
-            <h2 className="text-white underline mt-2 text-xl uppercase mt-5.5 font-black">
+            <h2 className="text-white  mt-2 text-xl uppercase mt-5.5 font-black  text-shadow-2xs text-shadow-black ">
               {product.name}
             </h2>
             <p className=" text-center text-gray-200/85 text-md italic">
               {product.description}
             </p>
 
-            <p className="mt-2 text-lg font-semibold text-red-700">
+            <p className="mt-2 text-xl font-semibold underline text-orange-500 text-shadow-2xs text-shadow-black">
               {product.price} RSD
             </p>
             <span className="mt-1 text-xs uppercase text-blue-200">
