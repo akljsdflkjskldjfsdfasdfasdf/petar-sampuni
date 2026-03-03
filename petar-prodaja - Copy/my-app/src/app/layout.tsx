@@ -206,7 +206,7 @@ export default function RootLayout({
             <h2 className="text-3xl md:text-4xl font-black text-center mb-6 border-b-2 w-50 mx-auto text-amber-300">
               O NAMA
             </h2>
-            <p className="text-4xl font-semibold  text-gray-200 leading-relaxed italic mb-6 text-center drop-shadow-2xl drop-shadow-black">
+            <p className="text-lg md:text-4xl font-semibold  text-gray-200 leading-relaxed italic mb-6 text-center drop-shadow-2xl drop-shadow-black">
               Mi smo DURU SHOP – posvećeni kvalitetu i lepoti kose. Naša misija
               je da pružimo proizvode koji donose snagu, sjaj i zdravlje vašoj
               kosi.
