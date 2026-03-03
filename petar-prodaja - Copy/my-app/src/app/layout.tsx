@@ -121,167 +121,169 @@ export default function RootLayout({
 
   return (
     <html lang="en">
-      <body >
-         <div  className=" relative  bg-gradient-to-b from-white/25  to-gray-100/10 to-101% md:to-60% text-gray-900 flex flex-col min-h-screen ">
-        {/* HEADER - Dodali smo ref={headerRef} */}
-        <header
-          ref={headerRef}
-          className=" relative w-[80vw] md:w-[60vw] m-auto rounded-b-4xl drop-shadow-lg drop-shadow-black font-serif "
-        >
-          {/* Pozadinski overlay */}
-          <div className="absolute inset-0 bg-yellow-400/75  opacity-70  drop-shadow-lg  m-auto rounded-b-4xl !z-0"></div>
-
-          {/* Sadržaj iznad overlay-a */}
-          <div className="relative !z-0 container mx-auto flex flex-col  items-center pb-1 text-black text-shadow-2xs text-shadow-black text-[17px]">
-            <h1
-              className={`text-[6.5vw] ${cinzel.className} md:text-4xl font-bold tracking-wide pb-4 pt-1 
-                 text-white
-                 bg-clip-text  drop-shadow-[1px_5px_4px_black] !cinzel.className  `}
-            >
-              DURU SHOP
-            </h1>
-            <nav className="flex items-center text-white text-1xl md:text-2xl font-medium">
-              {/* PRVI LINK SA LINIJOM */}
-
-              {/* DRUGI LINK SA LINIJOM */}
-              <div className="flex items-center border-r-2 border-white/40 !px-[4vw] ">
-                <a
-                  onClick={scrollToProducts}
-                  className="border-b-2 border-transparent transition duration-500 hover:border-white"
-                >
-                  Products
-                </a>
-              </div>
-
-              {/* TREĆI LINK (BEZ LINIJE) */}
-              <div className="flex items-center px-[4vw] ">
-                <a
-                  onClick={scrollToAbout}
-                  className="border-b-2 border-transparent transition duration-500 hover:border-white"
-                >
-                  About
-                </a>
-              </div>
-            </nav>
-          </div>
-        </header>
-        <AdminModal />
-        <div className="h-[95vh]">
-          <div
-            ref={heroRef}
-            className="relative h-[85vh] w-[90vw] m-auto mt-3.5 rounded-4xl bg-[url(/hair.jpg)] bg-no-repeat bg-center bg-cover bg-top"
+      <body>
+        <div className=" relative bg-black text-gray-900 flex flex-col min-h-screen ">
+          {/* HEADER - Dodali smo ref={headerRef} */}
+          <header
+            ref={headerRef}
+            className="  relative w-[80vw] md:w-[60vw] m-auto rounded-b-4xl drop-shadow-lg drop-shadow-black font-serif "
           >
-            {/* Overlay sloj */}
-            <div className="absolute inset-0 bg-black/35 rounded-4xl"></div>
+            {/* Pozadinski overlay */}
+            <div className="absolute inset-0 bg-yellow-400/75  opacity-70  drop-shadow-lg  m-auto rounded-b-4xl !z-0"></div>
 
             {/* Sadržaj iznad overlay-a */}
-            <button
-              ref={buttonRef}
-              onClick={scrollToProducts}
-              className="hover:bg-amber-400/70  absolute w-67  md:w-[60vw] lg:w-[25vw]  h-[7vh] rounded-[100vw] bg-amber-400/70  bottom-10 md:top-[65vh]  left-1/2 text-shadow-lg text-shadow-white -translate-x-1/2 text-black text-[5vh] font-serif uppercase z-10"
-            >
-              PROIZVODI
-            </button>
-            <h1
-              ref={textRef}
-              className="rounded-3xl drop-shadow-[1px_5px_4px_black] absolute bottom-0 top-1/2 left-1/2 -translate-x-1/2 italic h-20 text-2xl  rounded-2xl  font-extrabold uppercase w-[70vw] text-center drop-shadow-[1px_1px_40px_black] md:text-[3vw] text-white z-10"
-            >
-              Oseti kvalitet i snagu na svojoj kosi
-            </h1>
-          </div>
-        </div>
-        {/* MAIN CONTENT */}
-        <main
-          className="flex-1 container mx-auto  scroll-mt-[50vw]"
-          ref={mainRef}
-        >
-          {children}
-        </main>
-        {/* ABOUT SECTION */}
-        <section
-          ref={aboutRef}
-          id="about"
-          className="w-[80vw] relative container mx-auto p-10 my-10 rounded-3xl bg-white/10 shadow-lg"
-        >
-          <h2 className="text-3xl md:text-4xl font-black text-center mb-6 border-b-2 w-50 mx-auto text-amber-300">
-            O NAMA
-          </h2>
-          <p className="text-lg text-gray-200 leading-relaxed italic mb-6 text-center drop-shadow-2xl drop-shadow-black">
-            Mi smo DURU SHOP – posvećeni kvalitetu i lepoti kose. Naša misija je
-            da pružimo proizvode koji donose snagu, sjaj i zdravlje vašoj kosi.
-          </p>
+            <div className="relative !z-0 container mx-auto flex flex-col  items-center pb-1 text-black text-shadow-2xs text-shadow-black text-[17px]">
+              <h1
+                className={`text-[6.5vw] ${cinzel.className} md:text-4xl font-bold tracking-wide pb-4 pt-1 
+                 text-white
+                 bg-clip-text  drop-shadow-[1px_5px_4px_black] !cinzel.className  `}
+              >
+                DURU SHOP
+              </h1>
+              <nav className="flex items-center text-white text-1xl md:text-2xl font-medium">
+                {/* PRVI LINK SA LINIJOM */}
 
-          {/* Kontakt informacije */}
-          <div className="flex flex-col md:flex-row justify-around items-center gap-6 mb-8 drop-shadow-2xl drop-shadow-black">
-            <div className="text-center mx-auto text-white ">
-              <h3 className="text-xl font-semibold mb-2 text-amber-300">
-                Kontakt
-              </h3>
-              <p>Telefon: +381 64 123 4567</p>
-              <p>Email: info@durushop.rs</p>
+                {/* DRUGI LINK SA LINIJOM */}
+                <div className="flex items-center border-r-2 border-white/40 !px-[4vw] ">
+                  <a
+                    onClick={scrollToProducts}
+                    className="border-b-2 border-transparent transition duration-500 hover:border-white"
+                  >
+                    Products
+                  </a>
+                </div>
+
+                {/* TREĆI LINK (BEZ LINIJE) */}
+                <div className="flex items-center px-[4vw] ">
+                  <a
+                    onClick={scrollToAbout}
+                    className="border-b-2 border-transparent transition duration-500 hover:border-white"
+                  >
+                    About
+                  </a>
+                </div>
+              </nav>
             </div>
-            <div className="hidden md:block h-16 border-l-2 border-amber-300/30"></div>
+          </header>
+          <AdminModal />
+          <div className="h-[95vh] bg-black ">
+            <div
+              ref={heroRef}
+              className="relative  h-[85vh] w-[90vw] m-auto mt-3.5 rounded-4xl bg-[url(/hair.jpg)] bg-no-repeat bg-center bg-cover bg-top"
+            >
+              {/* Overlay sloj */}
+              <div className="absolute inset-0 bg-black/35 rounded-4xl"></div>
 
-            {/* Opciona horizontalna linija samo za mobilni */}
-            <div className="block md:hidden w-20 border-t-2 border-amber-300/30"></div>
-            <div className="text-center mx-auto text-white">
-              <h3 className="text-xl font-semibold mb-2 text-amber-300">
-                Adresa
-              </h3>
-              <p>Bulevar Oslobođenja 100</p>
-              <p>Novi Sad, Srbija</p>
+              {/* Sadržaj iznad overlay-a */}
+              <button
+                ref={buttonRef}
+                onClick={scrollToProducts}
+                className="hover:bg-amber-400/70  absolute w-67  md:w-[60vw] lg:w-[25vw]  h-[7vh] rounded-[100vw] bg-amber-400/70  bottom-10 md:top-[65vh]  left-1/2 text-shadow-lg text-shadow-white -translate-x-1/2 text-black text-[5vh] font-serif uppercase z-10"
+              >
+                PROIZVODI
+              </button>
+              <h1
+                ref={textRef}
+                className="rounded-3xl drop-shadow-[1px_5px_4px_black] absolute bottom-0 top-1/2 left-1/2 -translate-x-1/2 italic h-20 text-2xl  rounded-2xl  font-extrabold uppercase w-[70vw] text-center drop-shadow-[1px_1px_40px_black] md:text-[3vw] text-white z-10"
+              >
+                Oseti kvalitet i snagu na svojoj kosi
+              </h1>
             </div>
           </div>
-
-          {/* Mapa */}
-          <div className="w-full h-[400px] rounded-xl overflow-hidden shadow-md">
-            <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2830.123456789!2d19.843239!3d45.260509!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x475b105da5e15f7b%3A0x48e68c77b83bd05b!2sTrg%20Marije%20Trandafil%2024a%2C%20Novi%20Sad%2021000%2C%20Serbia!5e0!3m2!1sen!2srs!4v1700000000000!5m2!1sen!2srs"
-              width="100%"
-              height="100%"
-              style={{ border: 0 }}
-              allowFullScreen
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-            ></iframe>
-          </div>
-        </section>
-        {/* FOOTER */}
-
-        {/* FOOTER */}
-        <footer className="bg-black text-gray-300 text-sm">
-          <div className="container mx-auto p-4 flex justify-between items-center">
-            <p>
-              &copy; {new Date().getFullYear()} DURU SHOP. All rights reserved.
+          {/* MAIN CONTENT */}
+          <main
+            className="flex-1  mx-auto  !w-[100vw] scroll-mt-[50vw]   bg-gradient-to-b from-white/25  drop-shadow-2xl drop-shadow-amber-50/5    to-gray-100/10 to-101% md:to-60% rounded-4xl "
+            ref={mainRef}
+          >
+            {children}
+          </main>
+          {/* ABOUT SECTION */}
+          <section
+            ref={aboutRef}
+            id="about"
+            className="w-[80vw] relative container mx-auto p-10 my-10 rounded-3xl bg-white/10 shadow-lg"
+          >
+            <h2 className="text-3xl md:text-4xl font-black text-center mb-6 border-b-2 w-50 mx-auto text-amber-300">
+              O NAMA
+            </h2>
+            <p className="text-4xl font-semibold  text-gray-200 leading-relaxed italic mb-6 text-center drop-shadow-2xl drop-shadow-black">
+              Mi smo DURU SHOP – posvećeni kvalitetu i lepoti kose. Naša misija
+              je da pružimo proizvode koji donose snagu, sjaj i zdravlje vašoj
+              kosi.
             </p>
-            <div className="flex flex-col md:flex-row items-center space-y-1 md:space-x-6 text-center">
-              {/* Telefon */}
-              <span className="hover:text-white transition">
-                📞 +381 64 123 4567
-              </span>
 
-              {/* Email */}
-              <a
-                href="mailto:info@durushop.rs"
-                className="hover:text-white transition"
-              >
-                info@durushop.rs
-              </a>
+            {/* Kontakt informacije */}
+            <div className="flex flex-col md:flex-row justify-around items-center gap-6 mb-8 drop-shadow-2xl drop-shadow-black">
+              <div className="text-center mx-auto text-white ">
+                <h3 className="text-xl font-semibold mb-2 text-amber-300">
+                  Kontakt
+                </h3>
+                <p>Telefon: +381 64 123 4567</p>
+                <p>Email: info@durushop.rs</p>
+              </div>
+              <div className="hidden md:block h-16 border-l-2 border-amber-300/30"></div>
 
-              {/* Instagram */}
-              <a
-                href="https://instagram.com/durushop"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:text-white transition flex items-center gap-1"
-              >
-                <FaInstagram size={18} />
-                Instagram
-              </a>
+              {/* Opciona horizontalna linija samo za mobilni */}
+              <div className="block md:hidden w-20 border-t-2 border-amber-300/30"></div>
+              <div className="text-center mx-auto text-white">
+                <h3 className="text-xl font-semibold mb-2 text-amber-300">
+                  Adresa
+                </h3>
+                <p>Bulevar Oslobođenja 100</p>
+                <p>Novi Sad, Srbija</p>
+              </div>
             </div>
-          </div>
-        </footer>
-           </div>
+
+            {/* Mapa */}
+            <div className="w-full h-[400px] rounded-xl overflow-hidden shadow-md">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2830.123456789!2d19.843239!3d45.260509!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x475b105da5e15f7b%3A0x48e68c77b83bd05b!2sTrg%20Marije%20Trandafil%2024a%2C%20Novi%20Sad%2021000%2C%20Serbia!5e0!3m2!1sen!2srs!4v1700000000000!5m2!1sen!2srs"
+                width="100%"
+                height="100%"
+                style={{ border: 0 }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              ></iframe>
+            </div>
+          </section>
+          {/* FOOTER */}
+
+          {/* FOOTER */}
+          <footer className="bg-white/70 text-black font-bold  text-md">
+            <div className="container mx-auto p-4 flex justify-between items-center">
+              <p>
+                &copy; {new Date().getFullYear()} DURU SHOP. All rights
+                reserved.
+              </p>
+              <div className="flex flex-col md:flex-row items-center space-y-1 md:space-x-6 text-center">
+                {/* Telefon */}
+                <span className="hover:text-white transition">
+                  📞 +381 64 123 4567
+                </span>
+
+                {/* Email */}
+                <a
+                  href="mailto:info@durushop.rs"
+                  className="hover:text-white transition"
+                >
+                  info@durushop.rs
+                </a>
+
+                {/* Instagram */}
+                <a
+                  href="https://instagram.com/durushop"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-white transition flex items-center gap-1"
+                >
+                  <FaInstagram size={18} />
+                  Instagram
+                </a>
+              </div>
+            </div>
+          </footer>
+        </div>
       </body>
     </html>
   );
