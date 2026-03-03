@@ -75,7 +75,7 @@ export default function AboutPage() {
     <div className="container mx-auto p-6 !w-[100vw] h-100%   ">
       {/* FILTER */}
       {/* FILTERI I PRETRAGA */}
-      <div className="flex flex-col md:flex-row gap-4 justify-between items-center mb-10 bg-black/40 !w-[60vw]  mx-auto rounded-2xl p-4 lg:bg-black/40 lg:w-[50vw] lg:mx-auto lg:rounded-2xl lg:p-4">
+      <div className="flex flex-col md:flex-row gap-4 justify-between items-center mb-10 bg-black/40 w-[80vw] md:w-60vw border-2 border-orange-200/20  mx-auto rounded-2xl p-4 lg:bg-black/40 lg:w-[50vw] lg:mx-auto lg:rounded-2xl lg:p-4">
         {/* Kategorije */}
         <div className="flex gap-2">
           {["all", "shampoo", "gel"].map((cat) => (
@@ -112,23 +112,23 @@ export default function AboutPage() {
         {filteredProducts.map((product) => (
           <div
             key={product.id}
-            className="border-b-2 rounded-4xl drop-shadow-2xl  bg-gray-300/20 p-4 flex flex-col items-center w-[80vw] md:w-[20vw] lg-w[25vw]  h-100 mx-auto"
+            className="  rounded-4xl shadow-sm shadow-amber-50  bg-gray-300/10 p-4 flex flex-col items-center w-[80vw] md:w-[27vw] lg-w[25vw]  h-100 mx-auto"
           >
             {product.image_url && (
               <img
                 src={product.image_url}
                 alt={product.name}
-                className="w-100% h-50 object-cover rounded-md"
+                className="w-100% h-50 object-cover rounded-md drop-shadow-lg drop-shadow-yellow-600"
               />
             )}
-            <h2 className="text-white mt-2 text-xl font-bold font-black">
+            <h2 className="text-white underline mt-2 text-xl uppercase mt-5.5 font-black">
               {product.name}
             </h2>
-            <p className=" text-center text-gray-200 text-md italic">
+            <p className=" text-center text-gray-200/85 text-md italic">
               {product.description}
             </p>
 
-            <p className="mt-2 text-lg font-semibold text-amber-600">
+            <p className="mt-2 text-lg font-semibold text-red-700">
               {product.price} RSD
             </p>
             <span className="mt-1 text-xs uppercase text-blue-200">
