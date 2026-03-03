@@ -112,7 +112,7 @@ export default function AboutPage() {
         {filteredProducts.map((product) => (
           <div
             key={product.id}
-            className="border-b-2 rounded-4xl drop-shadow-2xl  bg-gray-300/20 p-4 flex flex-col items-center w-[60vw] md:w-[20vw] lg-w[25vw]  h-100 mx-auto"
+            className="border-b-2 rounded-4xl drop-shadow-2xl  bg-gray-300/20 p-4 flex flex-col items-center w-[80vw] md:w-[20vw] lg-w[25vw]  h-100 mx-auto"
           >
             {product.image_url && (
               <img
