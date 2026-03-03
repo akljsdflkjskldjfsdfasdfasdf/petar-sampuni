@@ -72,10 +72,10 @@ export default function AboutPage() {
   }, [filteredProducts]);
 
   return (
-    <div className="container mx-auto p-6 h-100% ">
+    <div className="container mx-auto p-6 !w-[100vw] h-100%   ">
       {/* FILTER */}
       {/* FILTERI I PRETRAGA */}
-      <div className="flex flex-col md:flex-row gap-4 justify-between items-center mb-10 bg-black/40 w-[80vw] mx-auto rounded-2xl p-4 lg:bg-black/40 lg:w-[50vw] lg:mx-auto lg:rounded-2xl lg:p-4">
+      <div className="flex flex-col md:flex-row gap-4 justify-between items-center mb-10 bg-black/40 !w-[60vw]  mx-auto rounded-2xl p-4 lg:bg-black/40 lg:w-[50vw] lg:mx-auto lg:rounded-2xl lg:p-4">
         {/* Kategorije */}
         <div className="flex gap-2">
           {["all", "shampoo", "gel"].map((cat) => (
@@ -112,7 +112,7 @@ export default function AboutPage() {
         {filteredProducts.map((product) => (
           <div
             key={product.id}
-            className="border-b-2 rounded-lg drop-shadow-2xl bg-black/50 p-4 flex flex-col items-center w-100% h-90 mx-auto"
+            className="border-b-2 rounded-4xl drop-shadow-2xl  bg-gray-300/20 p-4 flex flex-col items-center w-[60vw] md:w-[20vw] lg-w[25vw]  h-100 mx-auto"
           >
             {product.image_url && (
               <img
@@ -124,13 +124,14 @@ export default function AboutPage() {
             <h2 className="text-white mt-2 text-xl font-bold font-black">
               {product.name}
             </h2>
-            <p className=" text-center text-gray-200 text-sm">
+            <p className=" text-center text-gray-200 text-md italic">
               {product.description}
             </p>
+
             <p className="mt-2 text-lg font-semibold text-amber-600">
               {product.price} RSD
             </p>
-            <span className="mt-1 text-xs uppercase text-gray-400">
+            <span className="mt-1 text-xs uppercase text-blue-200">
               {product.category}
             </span>
           </div>
