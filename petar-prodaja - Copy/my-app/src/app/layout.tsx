@@ -17,6 +17,26 @@ const cinzel = Cinzel_Decorative({
 
 gsap.registerPlugin(ScrollToPlugin);
 
+// POMOĆNA KOMPONENTA ZA TICKER (Definisana van RootLayout-a)
+const Ticker = ({ innerRef }: { innerRef: React.RefObject<HTMLDivElement | null> }) => (
+  <div className="overflow-hidden bg-amber-400 py-2 border-y border-black/20 whitespace-nowrap flex w-full">
+    <div ref={innerRef} className="flex gap-10 items-center">
+      {/* Prvi set teksta */}
+      {[...Array(10)].map((_, i) => (
+        <h3 key={`txt1-${i}`} className="text-black font-black uppercase italic text-sm md:text-xl inline-block">
+          Besplatna dostava na svaku kupovinu! •
+        </h3>
+      ))}
+      {/* Dupli set teksta za seamless loop */}
+      {[...Array(10)].map((_, i) => (
+        <h3 key={`txt2-${i}`} className="text-black font-black uppercase italic text-sm md:text-xl inline-block">
+          Besplatna dostava na svaku kupovinu! •
+        </h3>
+      ))}
+    </div>
+  </div>
+);
+
 export default function RootLayout({
   children,
 }: {
@@ -28,7 +48,7 @@ export default function RootLayout({
   const buttonRef = useRef<HTMLButtonElement>(null);
   const textRef = useRef<HTMLHeadingElement>(null);
   const aboutRef = useRef<HTMLElement>(null);
-
+  
   // Reference za ticker animacije
   const tickerTopRef = useRef<HTMLDivElement>(null);
   const tickerBottomRef = useRef<HTMLDivElement>(null);
@@ -52,18 +72,16 @@ export default function RootLayout({
     });
   };
 
-  if (typeof window !== "undefined") {
-    window.history.scrollRestoration = "manual";
-  }
-
   useEffect(() => {
-    const timer = setTimeout(() => {
+    if (typeof window !== "undefined") {
+      window.history.scrollRestoration = "manual";
       window.scrollTo(0, 0);
-    }, 350);
+    }
 
     const ctx = gsap.context(() => {
       const tl = gsap.timeline();
 
+      // Ulazne animacije
       tl.from(headerRef.current, {
         y: -120,
         opacity: 0,
@@ -71,40 +89,29 @@ export default function RootLayout({
         ease: "back.out",
       });
 
-      tl.from(
-        heroRef.current,
-        {
-          y: 100,
-          opacity: 0,
-          duration: 1.2,
-          ease: "power3.out",
-        },
-        "-=0.5",
-      );
+      tl.from(heroRef.current, {
+        y: 100,
+        opacity: 0,
+        duration: 1.2,
+        ease: "power3.out",
+      }, "-=0.5");
 
       const split = new SplitText(textRef.current, { type: "words" });
-      tl.from(
-        split.words,
-        {
-          opacity: 0,
-          y: 30,
-          stagger: 0.1,
-          ease: "back.InOut",
-        },
-        "-=0.3",
-      );
+      tl.from(split.words, {
+        opacity: 0,
+        y: 30,
+        stagger: 0.1,
+        ease: "back.InOut",
+      }, "-=0.3");
 
-      tl.from(
-        buttonRef.current,
-        {
-          scale: 0.5,
-          opacity: 0,
-          duration: 0.8,
-          ease: "back.out",
-        },
-        "-=0.2",
-      );
+      tl.from(buttonRef.current, {
+        scale: 0.5,
+        opacity: 0,
+        duration: 0.8,
+        ease: "back.out",
+      }, "-=0.2");
 
+      // Lebdenje dugmeta
       gsap.to(buttonRef.current, {
         y: -15,
         duration: 1.5,
@@ -113,86 +120,41 @@ export default function RootLayout({
         ease: "sine.inOut",
       });
 
-      // GSAP Ticker Animacija (beskonačno ulevo)
+      // TICKER ANIMACIJA (Ulevo)
       [tickerTopRef, tickerBottomRef].forEach((ref) => {
         if (ref.current) {
           gsap.to(ref.current, {
             xPercent: -50,
             repeat: -1,
-            duration: 30,
+            duration: 15, // Povećaj sekunde ako hoćeš da ide sporije
             ease: "linear",
           });
         }
       });
     });
 
-    return () => {
-      ctx.revert();
-      clearTimeout(timer);
-    };
+    return () => ctx.revert();
   }, []);
-
-  // Pomoćna komponenta za ticker da ne ponavljamo kod
-  const Ticker = ({
-    innerRef,
-  }: {
-    innerRef: React.RefObject<HTMLDivElement>;
-  }) => (
-    <div className="overflow-hidden bg-amber-400 py-2 border-y border-black/10 whitespace-nowrap flex">
-      <div ref={innerRef} className="flex gap-10 items-center">
-        {/* Ponavljamo tekst više puta da popunimo širinu za beskonatan loop */}
-        {[...Array(10)].map((_, i) => (
-          <h3
-            key={i}
-            className="text-black font-black uppercase italic text-sm md:text-xl inline-block"
-          >
-            Besplatna dostava na svaku kupovinu! •
-          </h3>
-        ))}
-        {/* Dupliramo sadržaj za seamless prelaz */}
-        {[...Array(10)].map((_, i) => (
-          <h3
-            key={`dup-${i}`}
-            className="text-black font-black uppercase italic text-sm md:text-xl inline-block"
-          >
-            Besplatna dostava na svaku kupovinu! •
-          </h3>
-        ))}
-      </div>
-    </div>
-  );
 
   return (
     <html lang="en">
       <body>
-        <div className="relative bg-black text-gray-900 flex flex-col min-h-screen ">
+        <div className="relative bg-black text-gray-900 flex flex-col min-h-screen">
           <header
             ref={headerRef}
-            className="relative w-[80vw] md:w-[60vw] m-auto rounded-b-4xl drop-shadow-lg drop-shadow-black font-serif "
+            className="relative w-[80vw] md:w-[60vw] m-auto rounded-b-4xl drop-shadow-lg drop-shadow-black font-serif z-50"
           >
             <div className="absolute inset-0 bg-yellow-400/75 opacity-70 drop-shadow-lg m-auto rounded-b-4xl !z-0"></div>
-            <div className="relative !z-0 container mx-auto flex flex-col items-center pb-1 text-black text-shadow-2xs text-shadow-black text-[17px]">
-              <h1
-                className={`text-[6.5vw] ${cinzel.className} md:text-4xl font-bold tracking-wide pb-4 pt-1 text-white bg-clip-text drop-shadow-[1px_5px_4px_black]`}
-              >
+            <div className="relative !z-10 container mx-auto flex flex-col items-center pb-1 text-black text-[17px]">
+              <h1 className={`text-[6.5vw] ${cinzel.className} md:text-4xl font-bold tracking-wide pb-4 pt-1 text-white drop-shadow-[1px_5px_4px_black]`}>
                 DURU SHOP
               </h1>
-              <nav className="flex items-center text-white text-1xl md:text-2xl font-medium">
-                <div className="flex items-center border-r-2 border-white/40 !px-[4vw] ">
-                  <a
-                    onClick={scrollToProducts}
-                    className="cursor-pointer border-b-2 border-transparent transition duration-500 hover:border-white"
-                  >
-                    Products
-                  </a>
+              <nav className="flex items-center text-white text-1xl md:text-2xl font-medium cursor-pointer">
+                <div className="flex items-center border-r-2 border-white/40 !px-[4vw]">
+                  <a onClick={scrollToProducts} className="hover:border-b-2 border-white transition-all">Products</a>
                 </div>
-                <div className="flex items-center px-[4vw] ">
-                  <a
-                    onClick={scrollToAbout}
-                    className="cursor-pointer border-b-2 border-transparent transition duration-500 hover:border-white"
-                  >
-                    About
-                  </a>
+                <div className="flex items-center px-[4vw]">
+                  <a onClick={scrollToAbout} className="hover:border-b-2 border-white transition-all">About</a>
                 </div>
               </nav>
             </div>
@@ -200,7 +162,8 @@ export default function RootLayout({
 
           <AdminModal />
 
-          <div className="h-[95vh] bg-black ">
+          {/* HERO SECTION */}
+          <div className="h-[95vh] bg-black">
             <div
               ref={heroRef}
               className="relative h-[85vh] w-[90vw] m-auto mt-3.5 rounded-4xl bg-[url(/hair.jpg)] bg-no-repeat bg-center bg-cover bg-top"
@@ -209,98 +172,71 @@ export default function RootLayout({
               <button
                 ref={buttonRef}
                 onClick={scrollToProducts}
-                className="hover:bg-amber-500 absolute w-67 md:w-[60vw] lg:w-[25vw] h-[7vh] rounded-[100vw] bg-amber-400/70 bottom-10 md:top-[65vh] left-1/2 text-shadow-lg text-shadow-white -translate-x-1/2 text-black text-[5vh] font-serif uppercase z-10"
+                className="absolute w-67 md:w-[60vw] lg:w-[25vw] h-[7vh] rounded-[100vw] bg-amber-400/70 bottom-10 md:top-[65vh] left-1/2 -translate-x-1/2 text-black text-[5vh] font-serif uppercase z-10 hover:bg-amber-400 transition-colors"
               >
                 PROIZVODI
               </button>
               <h1
                 ref={textRef}
-                className="rounded-3xl drop-shadow-[1px_5px_4px_black] absolute bottom-0 top-1/2 left-1/2 -translate-x-1/2 italic h-20 text-2xl font-extrabold uppercase w-[70vw] text-center md:text-[3vw] text-white z-10"
+                className="absolute top-1/2 left-1/2 -translate-x-1/2 italic text-2xl font-extrabold uppercase w-[70vw] text-center md:text-[3vw] text-white z-10 drop-shadow-[1px_5px_4px_black]"
               >
                 Oseti kvalitet i snagu na svojoj kosi
               </h1>
             </div>
           </div>
 
+          {/* MAIN CONTENT SA TICKERIMA */}
           <main
-            className="flex-1 mx-auto !w-[100vw] scroll-mt-[50vw] bg-gradient-to-b from-white/25 drop-shadow-2xl drop-shadow-amber-50/5 to-gray-100/10 to-101% md:to-60% rounded-4xl "
             ref={mainRef}
+            className="flex-1 mx-auto !w-[100vw] scroll-mt-[50vw] bg-gradient-to-b from-white/25 to-gray-100/10 rounded-4xl overflow-hidden"
           >
-            {/* TICKER IZNAD CHILDREN */}
             <Ticker innerRef={tickerTopRef} />
+            
+            <div className="py-10">
+              {children}
+            </div>
 
-            <div className="py-10">{children}</div>
-
-            {/* TICKER ISPOD CHILDREN */}
             <Ticker innerRef={tickerBottomRef} />
           </main>
 
+          {/* ABOUT SECTION */}
           <section
             ref={aboutRef}
-            id="about"
             className="w-[80vw] relative container mx-auto p-10 my-10 rounded-3xl bg-white/10 shadow-lg"
           >
-            <h2 className="text-3xl md:text-4xl font-black text-center mb-6 border-b-2 w-50 mx-auto text-amber-300">
-              O NAMA
-            </h2>
-            <p className="text-lg md:text-4xl font-semibold text-gray-200 leading-relaxed italic mb-6 text-center drop-shadow-2xl drop-shadow-black">
-              Mi smo DURU SHOP – posvećeni kvalitetu i lepoti kose. Naša misija
-              je da pružimo proizvode koji donose snagu, sjaj i zdravlje vašoj
-              kosi.
+            <h2 className="text-3xl md:text-4xl font-black text-center mb-6 border-b-2 w-50 mx-auto text-amber-300">O NAMA</h2>
+            <p className="text-lg md:text-4xl font-semibold text-gray-200 leading-relaxed italic mb-6 text-center">
+              Mi smo DURU SHOP – posvećeni kvalitetu i lepoti kose. Naša misija je da pružimo proizvode koji donose snagu, sjaj i zdravlje vašoj kosi.
             </p>
-            <div className="flex flex-col md:flex-row justify-around items-center gap-6 mb-8 drop-shadow-2xl drop-shadow-black">
-              <div className="text-center mx-auto text-white ">
-                <h3 className="text-xl font-semibold mb-2 text-amber-300">
-                  Kontakt
-                </h3>
+            <div className="flex flex-col md:flex-row justify-around items-center gap-6 mb-8">
+              <div className="text-center mx-auto text-white">
+                <h3 className="text-xl font-semibold mb-2 text-amber-300">Kontakt</h3>
                 <p>Telefon: +381 64 123 4567</p>
                 <p>Email: info@durushop.rs</p>
               </div>
-              <div className="hidden md:block h-16 border-l-2 border-amber-300/30"></div>
-              <div className="block md:hidden w-20 border-t-2 border-amber-300/30"></div>
               <div className="text-center mx-auto text-white">
-                <h3 className="text-xl font-semibold mb-2 text-amber-300">
-                  Adresa
-                </h3>
+                <h3 className="text-xl font-semibold mb-2 text-amber-300">Adresa</h3>
                 <p>Bulevar Oslobođenja 100</p>
                 <p>Novi Sad, Srbija</p>
               </div>
             </div>
             <div className="w-full h-[400px] rounded-xl overflow-hidden shadow-md">
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2808.6657!2d19.8335!3d45.2492!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDXCsDE0JzU3LjEiTiAxOcKwNTAnMDAuNiJF!5e0!3m2!1sen!2srs!4v1625000000000!5m2!1sen!2srs"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2808.61!2d19.83!3d45.25!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDXCsDE1JzAwLjAiTiAxOcKwNDknNDguMCJF!5e0!3m2!1sen!2srs!4v123456789"
                 width="100%"
                 height="100%"
                 style={{ border: 0 }}
-                allowFullScreen
                 loading="lazy"
               ></iframe>
             </div>
           </section>
 
-          <footer className="bg-white/70 text-black font-bold text-md">
-            <div className="container mx-auto p-4 flex justify-between items-center">
-              <p>
-                © {new Date().getFullYear()} DURU SHOP. All rights reserved.
-              </p>
-              <div className="flex flex-col md:flex-row items-center space-y-1 md:space-x-6 text-center">
-                <span className="hover:text-white transition">
-                  📞 +381 64 123 4567
-                </span>
-                <a
-                  href="mailto:info@durushop.rs"
-                  className="hover:text-white transition"
-                >
-                  info@durushop.rs
-                </a>
-                <a
-                  href="https://instagram.com/durushop"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:text-white transition flex items-center gap-1"
-                >
-                  <FaInstagram size={18} /> Instagram
-                </a>
+          <footer className="bg-white/70 text-black font-bold p-4">
+            <div className="container mx-auto flex justify-between items-center">
+              <p>© {new Date().getFullYear()} DURU SHOP.</p>
+              <div className="flex flex-col md:flex-row gap-4">
+                <span>📞 +381 64 123 4567</span>
+                <a href="https://instagram.com/durushop" target="_blank" className="flex items-center gap-1"><FaInstagram /> Instagram</a>
               </div>
             </div>
           </footer>
