@@ -108,11 +108,14 @@ export default function AboutPage() {
         </div>
       </div>
       {/* GRID PROIZVODA */}
-      <div ref={gridRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3  gap-6 ">
+      <div
+        ref={gridRef}
+        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3  gap-6 "
+      >
         {filteredProducts.map((product) => (
           <div
             key={product.id}
-            className="  rounded-4xl shadow-sm shadow-amber-50  bg-gray-300/10 p-4 flex flex-col items-center w-[80vw] md:w-[27vw] lg:w-[22vw]  h-100 mx-auto"
+            className="  rounded-4xl shadow-sm shadow-amber-50  bg-gray-300/10 p-4 flex flex-col items-center w-[80vw] md:w-[27vw] lg:w-[18vw]  h-100 mx-auto"
           >
             {product.image_url && (
               <img
