@@ -39,28 +39,20 @@ export default function AboutPage() {
         gsap.utils.toArray(cards).forEach((card: any, index: number) => {
           gsap.fromTo(
             card,
-            {
-              x: 190,
-              opacity: 0,
-            }, // Početno stanje (automatski se primenjuje čim se stranica učita)
+            { x: 190, opacity: 0 },
             {
               x: 0,
               opacity: 1,
               ease: "back.inOut",
               duration: 0.8,
               overwrite: "auto",
-              delay: (index % 3) * 0.1, // Zadržavamo tvoj stagger efekat
+              delay: (index % 3) * 0.1, // stagger ostaje isti
 
               scrollTrigger: {
                 trigger: card,
-                start: "top 90%", // Animacija krece kad vrh kartice udari u 90% visine ekrana
-
-                // REDOSLED: onEnter, onLeave, onEnterBack, onLeaveBack
-                // "play" - pokreni animaciju ka x:0
-                // "reverse" - vrati animaciju unazad ka x:190 kad skroluješ nazad
-                toggleActions: "play none play reverse",
-
-                // markers: true, // Otkomentariši ovo ako želiš da vidiš linije okidača na ekranu
+                start: "top 90%",
+                toggleActions: "restart play none reverse", // ← PROMENA OVDE
+                // markers: true,
               },
             },
           );
@@ -110,12 +102,12 @@ export default function AboutPage() {
       {/* GRID PROIZVODA */}
       <div
         ref={gridRef}
-        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3  gap-6 "
+        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3  gap-20 "
       >
         {filteredProducts.map((product) => (
           <div
             key={product.id}
-            className="  rounded-4xl shadow-sm shadow-amber-50  bg-gray-300/10 p-4 flex flex-col items-center w-[80vw] md:w-[27vw] lg:w-[18vw]  h-100 mx-auto"
+            className="  rounded-4xl shadow-sm shadow-amber-50  bg-gray-300/10 p-4 flex flex-col items-center w-[70vw] md:w-[27vw] lg:w-[23vw]  h-100 mx-auto"
           >
             {product.image_url && (
               <img
